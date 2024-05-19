@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form
+        style="width: 500px;height: 300px;margin-top: 200px;margin-left: 300px; font-size: 25px; "
+
+        th:object="${student}"
+        th:action="@{/student/merge_update/{id}(id=${student.id})}"
+        th:method="post">
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">name</label><br>
+    <input th:field="${student.name}"
+           type="text" style="font-size: 20px" class="form-control" id="exampleInputEmail1"
+           aria-describedby="emailHelp"
+           placeholder="write your name">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword2">lastName</label><br>
+    <input th:field="${student.lastName}"
+           type="text" style="font-size: 20px" class="form-control" id="exampleInputPassword2"
+           placeholder="write your age">
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputPassword3">email</label><br>
+    <input th:field="${student.email}"
+           type="text" style="font-size: 20px" class="form-control" id="exampleInputPassword3"
+           placeholder="write your age">
+
+
+  </div> <div class="form-group">
+    <label for="exampleInputPassword4">studyFormat</label><br>
+    <input th:field="${student.studyFormat}"
+           type="text" style="font-size: 20px" class="form-control" id="exampleInputPassword4"
+           placeholder="write your age">
+  </div>
+
+
+
+</form>
+
+</body>
+</html>

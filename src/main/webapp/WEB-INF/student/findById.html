@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<table class="table table-dark">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">NAME</th>
+        <th scope="col">EMAIL</th>
+        <th scope="col">LAST_NAME</th>
+        <th scope="col">STUDY_FORMAT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:object="${only_student}">
+
+        <th th:text="${only_student.id}"></th>
+        <td th:text="${only_student.name}"></td>
+        <td th:text="${only_student.email}"></td>
+        <td th:text="${only_student.lastName}"></td>
+        <td th:text="${only_student.studyFormat}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

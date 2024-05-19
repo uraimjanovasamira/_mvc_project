@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<table class="table table-dark">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">NAME</th>
+        <th scope="col">LOCATED_COUNTRY</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:object="${only_company}">
+
+        <th th:text="${only_company.id}"></th>
+        <td th:text="${only_company.companyName}"></td>
+        <td th:text="${only_company.locatedCountry}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

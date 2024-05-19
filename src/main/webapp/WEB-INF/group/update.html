@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form
+        style="width: 500px;height: 300px;margin-top: 200px;margin-left: 300px; font-size: 25px; "
+
+        th:object="${group}"
+        th:action="@{/group/merge_update/{id}(id=${group.id})}"
+        th:method="post">
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">groupName</label><br>
+    <input th:field="${group.groupName}"
+           type="text" style="font-size: 20px" class="form-control" id="exampleInputEmail1"
+           aria-describedby="emailHelp"
+           placeholder="write course name">
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputDateOfStart">dateOfStart</label><br>
+    <input th:field="${group.dateOfStart}"
+           type="text" style="font-size: 20px" class="form-control" id="exampleInputDateOfStart"
+           placeholder="write duration">
+  </div>
+
+    <div class="form-group">
+    <label for="exampleInputDateOfFinish">dateOfFinish</label><br>
+    <input th:field="${group.dateOfFinish}"
+           type="text" style="font-size: 20px" class="form-control" id="exampleInputDateOfFinish"
+           placeholder="write duration">
+
+
+  </div>
+</form>
+
+</body>
+</html>

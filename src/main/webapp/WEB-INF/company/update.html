@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form
+        style="width: 500px;height: 300px;margin-top: 200px;margin-left: 300px; font-size: 25px; "
+
+        th:object="${company}"
+        th:action="@{/company/merge_update/{id}(id=${company.id})}"
+        th:method="post">
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">name</label><br>
+    <input th:field="${company.companyName}"
+           type="text" style="font-size: 20px" class="form-control" id="exampleInputEmail1"
+           aria-describedby="emailHelp"
+           placeholder="write your name">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">age</label><br>
+    <input th:field="${company.locatedCountry}"
+           type="text" style="font-size: 20px" class="form-control" id="exampleInputPassword1"
+           placeholder="write your age">
+  </div>
+</form>
+
+</body>
+</html>
