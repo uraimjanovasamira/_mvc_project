@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yandex Practicum Catalog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #12748d;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        nav a:hover {
+            background-color: #575757;
+        }
+
+
+        .course-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .course-card h2 {
+            margin: 0 0 10px;
+        }
+
+        .course-card p {
+            margin: 5px 0;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .course-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .course {
+            background: #f4f4f4;
+            margin: 10px;
+            padding: 20px;
+            flex: 1 1 calc(33% - 20px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login-box a {
+            display: inline-block;
+            padding: 12px 24px;
+            color: #12748d;
+            font-size: 18px;
+            text-decoration: none;
+            text-transform: uppercase;
+            border: 2px solid #12748d;
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: 0.3s;
+        }
+
+        .login-box a:hover {
+            background-color: #12748d;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Programming</h1>
+</header>
+<nav>
+    <a href="/company/find-all">Company</a>
+    <a href="/course/find-all">Course</a>
+    <a href="/group/find-all">Groups</a>
+
+</nav>
+
+<main>
+    <section id="courses">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <h1>Programming</h1>
+            <h2>WELCOME TO PEAKSOFT LEARNING MANAGEMENT SYSTEM</h2>
+
+            <div class="login-box">
+                <a href="/admin/add">REGISTRATION</a>
+                <a href="/login">LOGIN</a>
+            </div>
+
+            <div class="course-list">
+                <div th:each="course : ${courseList}" class="course">
+                    <h2 th:text="${course.courseName}">Course Name</h2>
+                    <p th:text="${course.duration}">Course Duration</p>
+                    <a th:href="@{/user/add}" class="register-btn">Enroll now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    &copy; Sami Uraimjanova
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                var filter = this.value.toLowerCase();
+                var courses = document.querySelectorAll('.course');
+
+                courses.forEach(function(course) {
+                    var courseName = course.querySelector('h2').innerText.toLowerCase();
+                    var courseDescription = course.querySelector('p').innerText.toLowerCase();
+
+                    if (courseName.includes(filter) || courseDescription.includes(filter)) {
+                        course.style.display = '';
+                    } else {
+                        course.style.display = 'none';
+                    }
+                });
+            });
+        }
+    });
+</script>
+</body>
+</html>

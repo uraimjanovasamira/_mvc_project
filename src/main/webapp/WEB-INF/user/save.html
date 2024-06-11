@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Developer Course</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: "Raleway", sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #0e0202; /* Черный фон */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #f0f0f0; /* Светлый цвет текста */
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff; /* Белый цвет текста */
+            margin-bottom: 20px;
+        }
+
+        .course-info, .registration-form, .modal-content {
+            background-color: #1a1a1a; /* Темный фон для блоков */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            color: #ffffff; /* Белый цвет текста */
+        }
+
+        .course-info {
+            margin-bottom: 20px;
+        }
+
+        .registration-form button, .modal-content button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #333; /* Цвет кнопки */
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: background-color 0.3s;
+        }
+
+        .registration-form button:hover, .modal-content button:hover {
+            background-color: #0733ed; /* Цвет кнопки при наведении */
+        }
+
+        .registration-form button::before, .modal-content button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent 40%);
+            transition: transform 0.5s, opacity 0.5s;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .registration-form button:hover::before, .modal-content button:hover::before {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 1;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон */
+        }
+
+        .modal-content {
+            margin: 10% auto;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover, .close:focus {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .modal-content label {
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .modal-content input, .modal-content select {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            color: #333;
+        }
+
+        .modal-content button {
+            margin-top: 20px;
+            background-color: #11855d; /* Цвет кнопки */
+        }
+
+        .modal-content button:hover {
+            background-color: #0d6b45; /* Цвет кнопки при наведении */
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>Java Developer Course</h1>
+    <div class="course-info">
+        <p>Programming is the process of writing instructions for computers to perform tasks. Key points include:</p>
+        <ul>
+            <li>Algorithms: Step-by-step instructions to solve problems.</li>
+            <li>Languages:
+                <ul>
+                    <li>Python: Easy to read, used in data science.</li>
+                    <li>JavaScript: Key for web development.</li>
+                    <li>Java: Used in enterprise and Android apps.</li>
+                </ul>
+            </li>
+        </ul>
+        <p>Duration: 10 weeks</p>
+        <p>Price: $900</p>
+    </div>
+
+    <div class="registration-form">
+        <button id="openModalBtn">Register for the Course</button>
+    </div>
+
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Registration Form</h2>
+            <form th:action="@{save}"
+                  th:method="post"
+                  th:object="${user}">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <label for="password">Password</label>
+                <input type="text" id="password" name="password" required>
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="studyFormat">Study Format</label>
+                <select id="studyFormat" name="studyFormat">
+
+
+                    <option value="ONLINE">ONLINE</option>
+                    <option value="OFFLINE">OFFLINE</option>
+                </select>
+                <div class="input-group mb-3">
+                    <label for="Group">Groups</label>
+                    <select id="Group" th:field="${user.group.id}" required>
+                        <option th:each="group:${groupList}"
+                                th:value="${group.id}"
+                                th:text="${group.groupName}">
+                        </option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <label for="Course">Courses</label>
+                    <select id="Course" th:field="${user.course.id}" required>
+                        <option th:each="course:${courseList}"
+                                th:value="${course.id}"
+                                th:text="${course.courseName}">
+                        </option>
+                    </select>
+                </div>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    var modal = document.getElementById('registrationModal');
+    var openModalBtn = document.getElementById('openModalBtn');
+    var span = document.getElementsByClassName('close')[0];
+
+    openModalBtn.onclick = function () {
+        modal.style.display = 'block';
+    }
+
+    span.onclick = function () {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>

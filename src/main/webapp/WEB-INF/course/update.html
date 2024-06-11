@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
 <form
@@ -12,19 +12,21 @@
         th:action="@{/course/merge_update/{id}(id=${course.id})}"
         th:method="post">
 
-  <div class="form-group">
-    <label for="exampleInputEmail1">courseName</label><br>
-    <input th:field="${course.courseName}"
-           type="text" style="font-size: 20px" class="form-control" id="exampleInputEmail1"
-           aria-describedby="emailHelp"
-           placeholder="write course name">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">duration</label><br>
-    <input th:field="${course.duration}"
-           type="text" style="font-size: 20px" class="form-control" id="exampleInputPassword1"
-           placeholder="write duration">
-  </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">courseName</label><br>
+        <input th:field="${course.courseName}"
+               type="text" style="font-size: 20px" class="form-control" id="exampleInputEmail1"
+               aria-describedby="emailHelp"
+               placeholder="write course name">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">duration</label><br>
+        <input th:field="${course.duration}"
+               type="text" style="font-size: 20px" class="form-control" id="exampleInputPassword1"
+               placeholder="write duration">
+    </div>
+    <button type="submit" style="background-color: white;">Update</button>
+
 </form>
 
 </body>

@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.Service.impl.GroupServiceImpl;
+import com.model.Company;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,7 +18,13 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class GroupController {
 
-    GroupServiceImpl groupService;
+     private final GroupServiceImpl groupService;
+
+     @ModelAttribute("groupList")
+     public List<Group>groupList(){
+         return groupService.findAll();
+     }
+
 
     @GetMapping("/add")
     public String addGroup(Model model) {
@@ -28,20 +35,19 @@ public class GroupController {
     @PostMapping("/save")
     public String saveGroup(@ModelAttribute("group") Group group) {
         groupService.save(group);
-        return "redirect:group/find-all";
+        return "redirect:/user/find-all";
     }
-
     @GetMapping("/find-all")
     public String findAll(Model model) {
         List<Group> groupList = groupService.findAll();
         model.addAttribute("groupList", groupList);
-        return "group/get-all";
+        return "/group/get-all";
     }
 
     @GetMapping("/find_by_id")
     public String findById(@RequestParam("group_id") Long id, Model model) {
         model.addAttribute("only_group", groupService.findById(id));
-        return "group/only_group";
+        return "group/findById";
     }
 
     @GetMapping("/update/{id}")
@@ -51,8 +57,8 @@ public class GroupController {
         return "group/update";
     }
 
-    @PutMapping("/merge_update/{id}")
-    public String mergeUpdate(@ModelAttribute Group group, @PathVariable long id) {
+    @PostMapping("/merge_update/{id}")
+    public String mergeUpdate(@ModelAttribute Group group, @PathVariable("id") long id) {
         groupService.update(id, group);
         return "redirect:group/find-all";
     }
@@ -63,3 +69,4 @@ public class GroupController {
         return "redirect:/group/find-all";
     }
 }
+

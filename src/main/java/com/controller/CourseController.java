@@ -1,6 +1,8 @@
 package com.controller;
 
+import com.Service.impl.CompanyService;
 import com.Service.impl.CourseServiceImpl;
+import com.model.Company;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,18 +20,24 @@ import java.util.List;
 public class CourseController {
 
     CourseServiceImpl courseService;
+    CompanyService companyService;
 
+
+    @ModelAttribute("companyList")
+    public List<Company> getCompanylist() {
+        return companyService.findAll();
+    }
 
     @GetMapping("/add")
     public String addCourse(Model model) {
-        model.addAttribute("course", new Course());
-        return "course/save";
+        model.addAttribute( "course", new Course());
+        return "/course/save";
     }
 
     @PostMapping("/save")
     public String saveCourse(@ModelAttribute("course") Course course) {
         courseService.save(course);
-        return "redirect:course/find-all";
+        return "redirect:/course/add";
     }
 
     @GetMapping("/find-all")
@@ -38,6 +46,8 @@ public class CourseController {
         model.addAttribute("courseList", courseList);
         return "course/get-all";
     }
+
+
 
     @GetMapping("/find_by_id")
     public String findById(@RequestParam("course_id") Long id, Model model) {
@@ -52,8 +62,8 @@ public class CourseController {
         return "course/update";
     }
 
-    @PutMapping("/merge_update/{id}")
-    public String mergeUpdate(@ModelAttribute Course course, @PathVariable long id) {
+    @PostMapping("/merge_update/{id}")
+    public String mergeUpdate(@ModelAttribute Course course, @PathVariable("id") long id) {
         courseService.update(id, course);
         return "redirect:course/find-all";
     }

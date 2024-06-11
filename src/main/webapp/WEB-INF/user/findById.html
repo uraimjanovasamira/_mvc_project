@@ -14,15 +14,17 @@
         <th scope="col">NAME</th>
         <th scope="col">EMAIL</th>
         <th scope="col">LAST_NAME</th>
+        <th scope="col">STUDY_FORMAT</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:object="${only_teacher}">
+    <tr th:object="${only_user}">
 
-        <th th:text="${only_teacher.id}"></th>
-        <td th:text="${only_teacher.name}"></td>
-        <td th:text="${only_teacher.email}"></td>
-        <td th:text="${only_teacher.lastName}"></td>
+        <th th:text="${only_user.id}"></th>
+        <td th:text="${only_user.name}"></td>
+        <td th:text="${only_user.email}"></td>
+        <td th:text="${only_user.lastName}"></td>
+        <td th:text="${only_user.studyFormat}"></td>
     </tr>
     </tbody>
 </table>

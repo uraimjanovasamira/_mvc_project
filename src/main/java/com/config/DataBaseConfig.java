@@ -66,7 +66,7 @@ public class DataBaseConfig {
         factoryBean.setJpaProperties(properties());
         factoryBean.setDataSource(dataSource());
         factoryBean.setJpaVendorAdapter(vendorAdapter());
-        factoryBean.setPackagesToScan("com.model");
+        factoryBean.setPackagesToScan("com/model");
         return factoryBean;
     }
 }

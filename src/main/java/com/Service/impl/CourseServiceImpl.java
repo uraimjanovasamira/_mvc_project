@@ -1,7 +1,9 @@
 package com.Service.impl;
 
 import com.Service.UserService;
+import com.model.Company;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import com.model.Course;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,13 @@ import java.util.List;
 @Transactional
 public class CourseServiceImpl implements UserService<Course> {
 
+    @PersistenceContext
     EntityManager entityManager;
 
     @Override
     public void save(Course course) {
+        Company company=entityManager.find(Company.class,course.getCompany().getId());
+        course.setCompany(company);
         entityManager.persist(course);
     }
 
@@ -39,7 +44,8 @@ public class CourseServiceImpl implements UserService<Course> {
 
     @Override
     public void delete(Long id) {
-        entityManager.remove(id);
+        Course course=findById(id);
+        entityManager.remove(course);
 
     }
 }

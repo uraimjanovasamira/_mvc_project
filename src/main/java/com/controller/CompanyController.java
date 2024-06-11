@@ -2,6 +2,8 @@ package com.controller;
 
 import com.Service.impl.CompanyService;
 
+import com.model.Course;
+import jakarta.persistence.metamodel.ListAttribute;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -29,7 +31,7 @@ public class CompanyController {
     @PostMapping("/save")
     public String saveCompany(@ModelAttribute("company") Company company) {
         companyService.save(company);
-        return "redirect:/company/find-all";
+        return "redirect:/course/add";
     }
 
     @GetMapping("/find-all")
@@ -55,7 +57,7 @@ public class CompanyController {
     }
 
     @PostMapping("/merge_update/{id}")
-    public String mergeUpdate(@ModelAttribute Company company, @PathVariable long id) {
+    public String mergeUpdate(@ModelAttribute Company company, @PathVariable("id") long id) {
         companyService.update(id, company);
         return "redirect:/company/find-all";
     }
@@ -65,6 +67,16 @@ public class CompanyController {
     public String deleteById(@PathVariable("id") Long id) {
         companyService.delete(id);
         return "redirect:/company/find-all";
+    }
+
+    public String getCourseByCompany(@PathVariable("companyId") Long companyId, Model model) {
+        List<Course> courses = companyService.getCoursesByCompany(companyId);
+        for (Course cours : courses) {
+            System.out.println(cours.getCourseName());
+        }
+        model.addAttribute("courses", courses);
+        model.addAttribute("size",courses.size());
+        return "/company/get-courses";
     }
 
 }

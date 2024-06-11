@@ -1,4 +1,4 @@
-package com.model.Enum;
+package com.enums;
 
 public enum StudyFormat {
     ONLINE,

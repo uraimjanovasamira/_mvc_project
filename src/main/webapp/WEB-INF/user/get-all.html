@@ -25,35 +25,38 @@
 <body>
 <table>
     <tr style="background-color: #64adab">
-        <td>ID</td>
-        <td>NAME</td>
+        <td> ID</td>
+        <td> NAME</td>
         <td> EMAIL</td>
         <td> LAST_NAME</td>
+        <td> ROLE </td>
         <td> STUDY_FORMAT</td>
+
 
         <td style="background-color: #64ad68">UPDATE</td>
         <td style="background-color: #c04040">DELETE</td>
 
         <td style="background-color: #6ece73">
-            <a href="/student/add">
+            <a href="/user/add">
                 <button style="background-color: #6ece73">+</button>
             </a>
         </td>
     </tr>
-    <tr th:each="student:${studentList}">
-        <td th:text="${student.id}"></td>
-        <td th:text="${student.name}"></td>
-        <td th:text="${student.email}"></td>
-        <td th:text="${student.lastName}"></td>
-        <td th:text="${student.studyFormat}"></td>
+    <tr th:each="user:${userList}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.role}"></td>
+        <td th:text="${user.studyFormat}"></td>
 
         <td>
-            <a th:href="@{/student/update/{id}(id=${student.getId()})}">
+            <a th:href="@{/user/update/{id}(id=${user.getId()})}">
                 <button type="button" style="background-color: #64ad68">update</button>
             </a>
         </td>
         <td>
-            <a th:href="@{/student/delete/{id}(id=${student.getId()})}">
+            <a th:href="@{/user/delete/{id}(id=${user.getId()})}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="65" height="16" fill="currentColor" class="bi bi-trash3"
                      viewBox="0 0 16 16">
                     <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>

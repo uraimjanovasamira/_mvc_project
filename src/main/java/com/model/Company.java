@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -20,12 +22,6 @@ public class Company {
     String companyName;
     String locatedCountry;
 
-    @ManyToOne
-    Course course;
-
-
-
-
-
-
+    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "company")
+    List<Course> courseList;
 }
